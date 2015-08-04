@@ -44,7 +44,7 @@ class Pootle_My_Account {
 
 		// Display Update API Manager data on a User's account page
 		add_action( 'woocommerce_before_my_account', function () {
-			ob_start();
+			remove_action( 'woocommerce_before_my_account', array( WCAM(), 'get_my_api_manger_account_template' ) );
 		}, 7 );
 		add_filter( 'woocommerce_my_account_my_address_title', function ( $title ) {
 			?>
@@ -58,7 +58,6 @@ class Pootle_My_Account {
 	}
 
 	public function before_my_account() {
-		ob_end_clean();
 		echo '<div style="display: none;">' . do_shortcode( '[tabs style="boxed"][/tabs]' ) . '</div>';
 		?>
 		<style>

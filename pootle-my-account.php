@@ -34,6 +34,14 @@ class Pootle_My_Account {
 	private function __clone() {}
 
 	private function __construct() {
+		add_action( 'init', array( $this, 'init' ) );
+	}
+
+	public function init() {
+		if ( ! class_exists( 'WooCommerce' ) || ! class_exists( 'WooCommerce_API_Manager' ) ) {
+			return;
+		}
+
 		// Display Update API Manager data on a User's account page
 		add_action( 'woocommerce_before_my_account', function () {
 			ob_start();
@@ -67,17 +75,12 @@ class Pootle_My_Account {
 		</style>
 		<div class="pootle-my-account-tabs shortcode-tabs boxed">
 			<ul class="tab_titles">
-				<li class="nav-tab"><a href="#tab-1">Dashboard</a></li>
-				<li class="nav-tab"><a href="#tab-2">My Downloads</a></li>
-				<li class="nav-tab"><a href="#tab-3">My Licenses</a></li>
-				<li class="nav-tab"><a href="#tab-4">My Orders</a></li>
-				<li class="nav-tab"><a href="#tab-5">My Details</a></li>
+				<li class="nav-tab"><a href="#tab-1">My Downloads</a></li>
+				<li class="nav-tab"><a href="#tab-2">My Licenses</a></li>
+				<li class="nav-tab"><a href="#tab-3">My Orders</a></li>
+				<li class="nav-tab"><a href="#tab-4">My Details</a></li>
 			</ul>
-			<div class="pmac-dashboard tab tab-first-tab">
-				<h2>Dashboard</h2>
-				<img style="box-sizing: border-box;" src="http://www.artisticsmiledoc.com/wp-content/uploads/2011/02/1290153023-65ONCD2-11.jpg"/>
-			</div>
-			<div class="pmac-downloads tab tab-another-tab">
+			<div class="pmac-downloads tab tab-first-tab">
 				<?php
 				wc_get_template( 'tpl-my-downloads.php', array(), '', plugin_dir_path( __FILE__ ) );
 				?>

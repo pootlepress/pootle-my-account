@@ -7,7 +7,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 exit; // Exit if accessed directly
 }
-
+?>
+<h2><?php echo 'My Downloads'; ?></h2>
+<?php
 if ( $downloads = WC()->customer->get_downloadable_products() ) { ?>
 
 	<?php do_action( 'woocommerce_before_available_downloads' ); ?>
@@ -81,5 +83,9 @@ if ( $downloads = WC()->customer->get_downloadable_products() ) { ?>
 
 	<?php do_action( 'woocommerce_after_available_downloads' ); ?>
 
+<?php
+} else {
+	?>
+	You have no downloadable products.
 <?php
 }
